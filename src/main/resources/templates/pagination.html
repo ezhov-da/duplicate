@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div th:fragment="pagination">
+    <div class="container">
+        <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+            <a
+                    th:if="${page.pagination.previous != null}"
+                    class="pagination-previous"
+                    th:href="${page.pagination.previousLink}"
+            >Предыдущая </a>
+            <a
+                    th:if="${page.pagination.next != null}"
+                    class="pagination-next"
+                    th:href="${page.pagination.nextLink}"
+            >Следующая </a>
+            <ul class="pagination-list">
+                <li th:if="${page.pagination.firstPage != null}"><a
+                        th:class="${page.pagination.firstPage == page.pagination.currentPageSelect} ? 'pagination-link is-current' : 'pagination-link'"
+                        th:aria-label="'Goto page' + ${page.pagination.firstPage}"
+                        th:text="${page.pagination.firstPage}"
+                        th:href="${page.pagination.firstPageLink}"
+                ></a></li>
+                <li><span
+                        th:if="${page.pagination.firstDots}"
+                        class="pagination-ellipsis"
+                >&hellip;</span></li>
+                <li th:if="${page.pagination.preCurrent != null}"><a
+                        th:class="${page.pagination.preCurrent == page.pagination.currentPageSelect} ? 'pagination-link is-current' : 'pagination-link'"
+                        th:aria-label="'Goto page' + ${page.pagination.preCurrent}"
+                        th:text="${page.pagination.preCurrent}"
+                        th:href="${page.pagination.preCurrentLink}"
+                ></a></li>
+                <li th:if="${page.pagination.current != null}"><a
+                        th:class="${page.pagination.current == page.pagination.currentPageSelect} ? 'pagination-link is-current' : 'pagination-link'"
+                        aria-current="page"
+                        th:aria-label="'Goto page' + ${page.pagination.current}"
+                        th:text="${page.pagination.current}"
+                        th:href="${page.pagination.currentLink}"
+                ></a></li>
+                <li th:if="${page.pagination.postCurrent != null}"><a
+                        th:class="${page.pagination.postCurrent == page.pagination.currentPageSelect} ? 'pagination-link is-current' : 'pagination-link'"
+                        th:aria-label="'Goto page' + ${page.pagination.postCurrent}"
+                        th:text="${page.pagination.postCurrent}"
+                        th:href="${page.pagination.postCurrentLink}"
+                ></a></li>
+                <li th:if="${page.pagination.lastDots}"><span
+                        class="pagination-ellipsis"
+                >&hellip;</span></li>
+                <li th:if="${page.pagination.lastPage != null}"><a
+                        th:class="${page.pagination.lastPage == page.pagination.currentPageSelect} ? 'pagination-link is-current' : 'pagination-link'"
+                        th:aria-label="'Goto page' + ${page.pagination.lastPage}"
+                        th:text="${page.pagination.lastPage}"
+                        th:href="${page.pagination.lastPageLink}"
+                ></a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+</body>
+
+</html>

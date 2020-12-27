@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Duplicate</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<section class="section">
+    <div class="container">
+        <div class="block">
+            <div>
+                <a href="/">Главная</a>
+            </div>
+            <div>
+                <a th:href="${page.selectedPage}">Выбранные</a>
+            </div>
+        </div>
+
+        <div class="block">
+            <div th:insert="~{pagination :: pagination}"></div>
+        </div>
+
+        <div class="block">
+            <div class="box" th:each="duplicate : ${page.duplicates.duplicates}">
+                <article class="media" th:if="${duplicate.commonNamePart != null}">
+                    <div class="media-left">
+                        <p>
+                            <strong th:text="${duplicate.commonNamePart}"></strong>
+                        </p>
+                    </div>
+                </article>
+                <article class="media">
+                    <div class="media-left">
+                        <figure class="image is-128x128">
+                            <img th:src="${duplicate.parts[0].link}">
+                        </figure>
+                    </div>
+                    <div class="media-content">
+                        <div class="content" th:each="part : ${duplicate.parts}">
+                            <label class="checkbox">
+                                <input type="checkbox" th:id="${part.id}" th:checked="${part.selected}"
+                                       th:selectLink="${part.selectLink}"> <span
+                                    th:text="${part.path}"/>
+                                <a target="_blank" th:href="${part.link}"><span th:text="${part.name}"/> </a>
+                            </label>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <div class="block">
+            <div th:insert="~{pagination :: pagination}"></div>
+        </div>
+    </div>
+
+    <script th:inline="javascript">
+        $("input[type='checkbox']").on("click", function (event) {
+            console.log(event);
+            console.log(event.target.id);
+            console.log(event.target.checked);
+
+            let selectLink = $(event.target).attr("selectLink");
+
+            $.ajax({
+                url: selectLink,
+                type: "PUT",
+                // data: JSON.stringify({select: event.target.checked}),
+                // contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    console.log(result)
+
+                    event.target.checked = result.select
+                },
+                error: function (result) {
+                    console.log(result)
+
+                    event.target.checked = !event.target.checked
+                },
+
+            });
+        });
+    </script>
+</section>
+</body>
+</html>

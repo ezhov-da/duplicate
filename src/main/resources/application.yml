@@ -1,0 +1,12 @@
+storage:
+  folder: ${user.home}/.duplicate-repository
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+server:
+  tomcat:
+    max-http-form-post-size: 10MB

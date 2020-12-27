@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Duplicate</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<section class="section">
+    <div class="container">
+        <div class="block">
+            <div>
+                <a href="/">Главная</a>
+            </div>
+            <div>
+                <a th:href="${page.duplicatesLink}">Выбор дубликатов</a>
+            </div>
+        </div>
+
+        <div class="block">
+            <div th:insert="~{pagination :: pagination}"></div>
+        </div>
+
+        <div class="block">
+            <div class="box" th:each="part : ${page.parts}">
+                <article class="media">
+                    <div class="media-left">
+                        <figure class="image is-128x128">
+                            <img th:src="${part.link}">
+                        </figure>
+                    </div>
+                    <div class="media-content">
+                        <div class="content">
+                            <span th:text="${part.path}"/>
+                            <a target="_blank" th:href="${part.link}"><span th:text="${part.name}"/> </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <div class="block">
+            <div th:insert="~{pagination :: pagination}"></div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
