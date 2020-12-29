@@ -1,6 +1,5 @@
 package ru.ezhov.duplicate.view
 
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
@@ -8,22 +7,21 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestParam
 import ru.ezhov.duplicate.domain.DuplicateSelectedService
 import ru.ezhov.duplicate.domain.DuplicateService
-import ru.ezhov.duplicate.domain.PartService
 import ru.ezhov.duplicate.domain.UploadService
+import java.security.Principal
 import java.time.format.DateTimeFormatter
-import javax.websocket.server.PathParam
 
 @Controller
 class UploadController(
-        @Autowired val uploadService: UploadService,
-        @Autowired val duplicateService: DuplicateService,
-        @Autowired val duplicateSelectedService: DuplicateSelectedService,
+        private val uploadService: UploadService,
+        private val duplicateService: DuplicateService,
+        private val duplicateSelectedService: DuplicateSelectedService,
 
-        @Autowired val duplicateViewService: DuplicateViewService
+        private val duplicateViewService: DuplicateViewService
 
 ) {
     @GetMapping("/")
-    fun index(model: Model): String {
+    fun index(model: Model, principal: Principal): String {
         val uploads = uploadService
                 .all()
                 .sortedByDescending { it.date }
@@ -46,6 +44,7 @@ class UploadController(
         model.addAttribute(
                 "page",
                 IndexPage(
+                        principal.name,
                         uploads = uploads
                 )
         )
@@ -56,16 +55,24 @@ class UploadController(
     fun duplicates(
             @PathVariable uploadId: String,
             @RequestParam(defaultValue = "1") page: Int,
-            model: Model
+            model: Model,
+            principal: Principal
     ): String {
-        return duplicateViewService.duplicates(model = model, uploadId = uploadId, page = page)
+        return duplicateViewService.duplicates(
+                model = model,
+                uploadId = uploadId,
+                page = page,
+                username = principal.name
+        )
     }
 
     @GetMapping("/uploads/{uploadId}/duplicates/selected")
     fun selected(
             @PathVariable uploadId: String,
             @RequestParam(defaultValue = "1") page: Int,
-            model: Model): String {
+            model: Model,
+            principal: Principal
+    ): String {
         val sizeOnPage = 10
 
         uploadService
@@ -95,6 +102,7 @@ class UploadController(
                     model.addAttribute(
                             "page",
                             SelectedPage(
+                                    username= principal.name,
                                     uploadId = uploadId,
                                     duplicatesLink = "/uploads/$uploadId/duplicates",
                                     parts = selected,

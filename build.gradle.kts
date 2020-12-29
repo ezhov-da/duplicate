@@ -17,6 +17,7 @@ repositories {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.11.1")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.11.1")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")

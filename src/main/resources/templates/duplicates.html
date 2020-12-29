@@ -9,11 +9,13 @@
 </head>
 <body>
 <section class="section">
+
+    <div class="block">
+        <div th:insert="~{menu :: menu}"></div>
+    </div>
+
     <div class="container">
         <div class="block">
-            <div>
-                <a href="/">Главная</a>
-            </div>
             <div>
                 <a th:href="${page.selectedPage}">Выбранные</a>
             </div>

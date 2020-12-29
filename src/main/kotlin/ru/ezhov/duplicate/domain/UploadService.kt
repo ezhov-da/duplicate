@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class UploadService(
-        @Autowired private val uploadRepository: UploadRepository
+        private val uploadRepository: UploadRepository
 ) {
     fun all(): List<Upload> = uploadRepository.all()
 

@@ -7,14 +7,14 @@ import ru.ezhov.duplicate.domain.*
 
 @Service
 class DuplicateViewService(
-        @Autowired private val uploadService: UploadService,
-        @Autowired private val duplicateService: DuplicateService,
-        @Autowired private val duplicateSelectedService: DuplicateSelectedService,
-        @Autowired private val partService: PartService,
+        private val uploadService: UploadService,
+        private val duplicateService: DuplicateService,
+        private val duplicateSelectedService: DuplicateSelectedService,
+        private val partService: PartService,
 ) {
     private val commonPartService: CommonPartService = CommonPartService()
 
-    fun duplicates(model: Model, sizeOnPage: Int = 10, uploadId: String, page: Int): String {
+    fun duplicates(model: Model, sizeOnPage: Int = 10, uploadId: String, page: Int, username: String): String {
         uploadService
                 .by(uploadId)
                 ?.let {
@@ -37,6 +37,7 @@ class DuplicateViewService(
                     model.addAttribute(
                             "page",
                             DuplicatePage(
+                                    username = username,
                                     pagination = pagination,
                                     selectedPage = "/uploads/$uploadId/duplicates/selected",
                                     duplicates = DuplicatesView(

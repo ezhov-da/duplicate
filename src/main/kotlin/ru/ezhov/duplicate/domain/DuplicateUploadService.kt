@@ -6,11 +6,11 @@ import java.io.File
 
 @Service
 class DuplicateUploadService(
-        @Autowired private val fingerprintParser: FingerprintParser,
-        @Autowired private val uploadService: UploadService,
-        @Autowired private val duplicateAnalyserService: DuplicateAnalyserService,
-        @Autowired private val duplicateRepository: DuplicateRepository,
-        @Autowired private val partRepository: PartRepository
+        private val fingerprintParser: FingerprintParser,
+        private val uploadService: UploadService,
+        private val duplicateAnalyserService: DuplicateAnalyserService,
+        private val duplicateRepository: DuplicateRepository,
+        private val partRepository: PartRepository
 ) {
     fun upload(name: String, data: ByteArray) {
         val fingerprints = fingerprintParser.parse(name, data)

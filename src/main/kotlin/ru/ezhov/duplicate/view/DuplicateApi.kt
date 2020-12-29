@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletResponse
 
 @RestController
 class DuplicateApi(
-        @Autowired private val partSelectedRepository: PartSelectedRepository,
-        @Autowired private val duplicateUploadService: DuplicateUploadService,
-        @Autowired private val partService: PartService
+        private val partSelectedRepository: PartSelectedRepository,
+        private val duplicateUploadService: DuplicateUploadService,
+        private val partService: PartService
 ) {
     @GetMapping("/data")
     fun data(@RequestParam id: String): ResponseEntity<ByteArray> {

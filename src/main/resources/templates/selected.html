@@ -10,10 +10,12 @@
 <body>
 <section class="section">
     <div class="container">
+
         <div class="block">
-            <div>
-                <a href="/">Главная</a>
-            </div>
+            <div th:insert="~{menu :: menu}"></div>
+        </div>
+
+        <div class="block">
             <div>
                 <a th:href="${page.duplicatesLink}">Выбор дубликатов</a>
             </div>

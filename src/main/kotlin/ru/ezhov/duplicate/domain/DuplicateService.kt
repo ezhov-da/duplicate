@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class DuplicateService(
-        @Autowired private val duplicateRepository: DuplicateRepository
+        private val duplicateRepository: DuplicateRepository
 ) {
     fun all() = duplicateRepository.all()
 

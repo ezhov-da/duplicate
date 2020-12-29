@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class PartService(
-        @Autowired private val partRepository: PartRepository
+        private val partRepository: PartRepository
 ) {
     fun all() = partRepository.all()
 

@@ -10,6 +10,10 @@
 <body>
 <section class="section">
     <div class="container">
+        <div class="block">
+            <div th:insert="~{menu :: menu}"></div>
+        </div>
+
         <div class="box">
             <form enctype="multipart/form-data" method="post" action="/upload/file">
                 <div class="field">
