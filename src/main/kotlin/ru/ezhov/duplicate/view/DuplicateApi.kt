@@ -17,12 +17,13 @@ class DuplicateApi(
         private val partService: PartService
 ) {
     @GetMapping("/data")
-    fun data(@RequestParam id: String): ResponseEntity<ByteArray> {
-        return ResponseEntity
-                .ok()
-                .header(HttpHeaders.CONTENT_TYPE, "image/jpg")
-                .body(partService.data(id))
-    }
+    fun data(@RequestParam id: String): ResponseEntity<ByteArray> =
+            partService.data(id).let {
+                ResponseEntity
+                        .ok()
+                        .header(HttpHeaders.CONTENT_TYPE, it.mimeType)
+                        .body(it.data)
+            }
 
     @PutMapping("/uploads/{uploadId}/duplicates/part/{id}/select")
     fun select(@PathVariable uploadId: String, @PathVariable id: String): ResponseEntity<SelectResult> {

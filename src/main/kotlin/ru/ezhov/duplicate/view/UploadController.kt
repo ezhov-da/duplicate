@@ -16,10 +16,10 @@ class UploadController(
         private val uploadService: UploadService,
         private val duplicateService: DuplicateService,
         private val duplicateSelectedService: DuplicateSelectedService,
+        private val duplicateViewService: DuplicateViewService,
+        private val fileService: FileService,
 
-        private val duplicateViewService: DuplicateViewService
-
-) {
+        ) {
     @GetMapping("/")
     fun index(model: Model, principal: Principal): String {
         val uploads = uploadService
@@ -87,6 +87,7 @@ class UploadController(
                                                 path = it.file.absolutePath,
                                                 name = it.name,
                                                 link = "/data?id=${it.id}",
+                                                fileType = fileService.fileType(it.file.absolutePath).name
                                         )
                                     }
                     val pagination = PaginationService(page, 10, selected.size)
@@ -102,7 +103,7 @@ class UploadController(
                     model.addAttribute(
                             "page",
                             SelectedPage(
-                                    username= principal.name,
+                                    username = principal.name,
                                     uploadId = uploadId,
                                     duplicatesLink = "/uploads/$uploadId/duplicates",
                                     parts = selected,

@@ -1,21 +1,30 @@
 package ru.ezhov.duplicate.domain
 
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import ru.ezhov.duplicate.view.FileService
 
 @Service
 class PartService(
-        private val partRepository: PartRepository
+        private val partRepository: PartRepository,
+        private val fileService: FileService
+
 ) {
     fun all() = partRepository.all()
 
-    fun data(id: String): ByteArray {
+    fun data(id: String): PartFileView {
         val part = partRepository.by(id)
         val file = part?.file
         return if (file?.exists() == true) {
-            file.readBytes()
+            PartFileView(
+                    fileService.mimeType(file.absolutePath),
+                    file.readBytes()
+            )
+
         } else {
-            this.javaClass.getResource("/static/not-found.jpg").readBytes()
+            PartFileView(
+                    "image/jpeg",
+                    this.javaClass.getResource("/static/not-found.jpg").readBytes()
+            )
         }
     }
 

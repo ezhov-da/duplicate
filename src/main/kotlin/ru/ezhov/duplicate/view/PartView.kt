@@ -6,5 +6,6 @@ data class PartView(
         val name: String,
         val link: String,
         val selected: Boolean = false,
-        val selectLink: String
+        val selectLink: String,
+        val fileType: String
 )

@@ -11,6 +11,7 @@ class DuplicateViewService(
         private val duplicateService: DuplicateService,
         private val duplicateSelectedService: DuplicateSelectedService,
         private val partService: PartService,
+        private val fileService: FileService,
 ) {
     private val commonPartService: CommonPartService = CommonPartService()
 
@@ -67,6 +68,7 @@ class DuplicateViewService(
                     link = "/data?id=${p.id}",
                     selected = selectedParts.find { s -> s.id == p.id } !== null,
                     selectLink = "/uploads/$uploadId/duplicates/part/${p.id}/select",
+                    fileType = fileService.fileType(p.file.absolutePath).name
             )
         }
 

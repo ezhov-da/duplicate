@@ -29,9 +29,24 @@
             <div class="box" th:each="part : ${page.parts}">
                 <article class="media">
                     <div class="media-left">
-                        <figure class="image is-128x128">
-                            <img th:src="${part.link}">
-                        </figure>
+                        <div class="media-left">
+                            <figure th:if="${part.fileType == 'IMAGE'}" class="image is-128x128">
+                                <img th:src="${part.link}">
+                            </figure>
+                            <figure th:if="${part.fileType == 'AUDIO'}">
+                                <audio controls>
+                                    <source th:src="${part.link}">
+                                </audio>
+                            </figure>
+                            <figure th:if="${part.fileType == 'VIDEO'}" class="image is-128x128">
+                                <video controls>
+                                    <source th:src="${part.link}">
+                                </video>
+                            </figure>
+                            <figure th:if="${part.fileType == 'OTHER'}" class="image is-128x128">
+                                <img th:src="${part.link}">
+                            </figure>
+                        </div>
                     </div>
                     <div class="media-content">
                         <div class="content">

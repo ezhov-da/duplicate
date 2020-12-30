@@ -5,4 +5,5 @@ data class SelectedPartView(
         val path: String,
         val name: String,
         val link: String,
+        val fileType: String,
 )
