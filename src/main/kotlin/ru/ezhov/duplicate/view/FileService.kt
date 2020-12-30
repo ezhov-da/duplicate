@@ -15,7 +15,7 @@ class FileService {
     fun fileType(filePath: String): FileType =
             File(filePath)
                     .takeIf { it.exists() }
-                    .let {
+                    ?.let {
                         val type = this.mimeType(filePath).substringBefore("/")
                         FileType.values().toList().firstOrNull { it.name == type.toUpperCase() }
                     }
