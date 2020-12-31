@@ -9,24 +9,29 @@ class PartService(
         private val fileService: FileService
 
 ) {
+
     fun all() = partRepository.all()
 
     fun data(id: String): PartFileView {
         val part = partRepository.by(id)
         val file = part?.file
-        return if (file?.exists() == true) {
-            PartFileView(
-                    fileService.mimeType(file.absolutePath),
-                    file.readBytes()
-            )
-
-        } else {
-            PartFileView(
-                    "image/jpeg",
-                    this.javaClass.getResource("/static/not-found.jpg").readBytes()
-            )
-        }
+        return file
+                .takeIf { it?.exists() ?: false }
+                ?.let {
+                    PartFileView(
+                            fileService.mimeType(file!!.absolutePath) ?: defaultMimeType,
+                            file.readBytes()
+                    )
+                }
+                ?: PartFileView(
+                        defaultMimeType,
+                        this.javaClass.getResource("/static/not-found.jpg").readBytes()
+                )
     }
 
     fun by(partId: String): Part? = partRepository.by(partId)
+
+    companion object {
+        private const val defaultMimeType = "image/jpeg"
+    }
 }
