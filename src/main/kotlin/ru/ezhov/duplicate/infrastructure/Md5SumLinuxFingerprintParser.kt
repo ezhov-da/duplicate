@@ -9,7 +9,9 @@ import java.io.File
 import java.util.*
 
 @Service
-class Md5SumLinuxFingerprintParser : FingerprintParser {
+class Md5SumLinuxFingerprintParser(
+        private val osDetector: OsDetector
+) : FingerprintParser {
     override fun parse(name: String, bytes: ByteArray): List<Fingerprint> {
         Scanner(ByteArrayInputStream(bytes), "UTF-8").use { scanner ->
             val files: MutableList<Fingerprint> = ArrayList<Fingerprint>()
@@ -20,8 +22,9 @@ class Md5SumLinuxFingerprintParser : FingerprintParser {
                     throw FingerprintParserException("Error format '$name'")
                 }
                 val sum = line.substring(0, index)
-                val file = convertPath(line.substring(index + 1))
-                files.add(Fingerprint(id = sum.trim(), file = File(file)))
+                val path = line.substring(index + 1)
+                val filePath = if (osDetector.isWindows()) convertPath(path) else path
+                files.add(Fingerprint(id = sum.trim(), filePath = filePath))
             }
             return files
         }
@@ -31,6 +34,6 @@ class Md5SumLinuxFingerprintParser : FingerprintParser {
         val begin = path.substring(0, 2)
         val another = path.substring(3)
         val disk = begin.substring(1)
-        return disk.toUpperCase() + ":/" + another
+        return disk.toUpperCase() + ":\\" + another.replace(oldValue = "/", newValue = "\\")
     }
 }

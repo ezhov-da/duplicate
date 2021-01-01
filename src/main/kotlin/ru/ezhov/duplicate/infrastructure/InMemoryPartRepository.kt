@@ -18,14 +18,6 @@ class InMemoryPartRepository(
     private val objectMapper: ObjectMapper = ObjectMapper(YAMLFactory()).apply { registerModule(JavaTimeModule()) }
     private val partsList: ConcurrentLinkedQueue<Part> = ConcurrentLinkedQueue<Part>()
 
-    override fun all(): List<Part> {
-        if (partsList.isEmpty()) {
-            load()
-        }
-
-        return partsList.toList()
-    }
-
     override fun by(id: String): Part? {
         if (partsList.isEmpty()) {
             load()

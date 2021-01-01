@@ -7,23 +7,20 @@ import ru.ezhov.duplicate.view.FileService
 class PartService(
         private val partRepository: PartRepository,
         private val fileService: FileService
-
 ) {
 
-    fun all() = partRepository.all()
-
-    fun data(id: String): PartFileView {
+    fun data(id: String): PartFileInfo {
         val part = partRepository.by(id)
         val file = part?.file
         return file
                 .takeIf { it?.exists() ?: false }
                 ?.let {
-                    PartFileView(
+                    PartFileInfo(
                             fileService.mimeType(file!!.absolutePath) ?: defaultMimeType,
                             file.readBytes()
                     )
                 }
-                ?: PartFileView(
+                ?: PartFileInfo(
                         defaultMimeType,
                         this.javaClass.getResource("/static/not-found.jpg").readBytes()
                 )

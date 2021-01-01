@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div th:fragment="filter">
+    <div class="container" th:if="${page.filters != null && page.filters.size() > 0}">
+        <nav class="level">
+            <div class="level-left">
+                <div class="level-item">
+                    <p class="level-item subtitle is-5"> Фильтр по типу файла: </p>
+                    <p class="level-item has-text-centered" th:each="filter : ${page.filters}">
+                        <a class="link is-info" th:href="${filter.link}" th:text="${filter.name}"></a>
+                    </p>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,3 @@
+d41d8cd98f00b204e9800998ecf8427e */d/redmi3s-20201221-work/Camera/duplicate-2020-12-30.txt
+5aa858befc56dee1effe7eae1c0f88bb */d/redmi3s-20201221-work/Camera/file_example_JPG_100kB.jpg
+0c481e87f2774b1bd41a0a70d9b70d11 */d/redmi3s-20201221-work/Camera/file_example_MP3_700KB — копия (2).mp3

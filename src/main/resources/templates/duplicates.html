@@ -17,8 +17,12 @@
     <div class="container">
         <div class="block">
             <div>
-                <a th:href="${page.selectedPage}">Выбранные</a>
+                <a th:href="${page.selectedPage}">Выбранные файлы для удаления</a>
             </div>
+        </div>
+
+        <div class="block">
+            <div th:insert="~{filter :: filter}"></div>
         </div>
 
         <div class="block">

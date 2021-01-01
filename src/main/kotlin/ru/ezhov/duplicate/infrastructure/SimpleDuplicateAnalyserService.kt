@@ -2,6 +2,7 @@ package ru.ezhov.duplicate.infrastructure
 
 import org.springframework.stereotype.Service
 import ru.ezhov.duplicate.domain.*
+import java.io.File
 
 @Service
 class SimpleDuplicateAnalyserService : DuplicateAnalyserService {
@@ -13,10 +14,11 @@ class SimpleDuplicateAnalyserService : DuplicateAnalyserService {
                         val parts = e
                                 .value
                                 .mapIndexed { index, f ->
+                                    val file = File(f.filePath)
                                     AnalysePart(
                                             id = "${f.id}-$index",
-                                            name = f.file.name,
-                                            file = f.file,
+                                            name = file.name,
+                                            file = file,
                                     )
                                 }
                         AnalyseDuplicate(

@@ -1,6 +1,6 @@
 package ru.ezhov.duplicate.domain
 
-class PartFileView(
+class PartFileInfo(
         val mimeType: String,
         val data: ByteArray,
 )
