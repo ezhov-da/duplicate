@@ -100,7 +100,9 @@ class UploadController(
                                                 }
                                     }
                     val pagination = PaginationService(page, 10, selected.size)
-                            .calculate { page -> page?.let { "/uploads/$uploadId/duplicates/selected${FilterParams.create().add("page",page).add("fileType", fileType).query()}" } }
+                            .calculate { page ->
+                                page?.let { "/uploads/$uploadId/duplicates/selected${FilterParams.create().add("page", page).add("fileType", fileType).query()}" }
+                            }
 
                     val filtersView = mutableListOf(FilterView(name = "Все", link = "/uploads/$uploadId/duplicates"))
                     filtersView
