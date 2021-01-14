@@ -34,9 +34,10 @@
                 <article class="media">
                     <div class="media-left">
                         <div class="media-left">
-                            <figure th:if="${part.fileType == 'IMAGE'}" class="image is-128x128">
-                                <img th:src="${part.link}">
-                            </figure>
+                            <a class="button is-outlined modal-button" data-target="modal-bis"
+                               th:imageLink="${part.link}"
+                               th:if="${part.fileType == 'IMAGE'}">View image
+                            </a>
                             <figure th:if="${part.fileType == 'AUDIO'}">
                                 <audio controls>
                                     <source th:src="${part.link}">
@@ -67,5 +68,19 @@
         </div>
     </div>
 </section>
+
+<!--modal windows-->
+<div id="modal-bis" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <p class="image">
+            <img id="image-view-link" alt="">
+        </p>
+    </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+</div>
+
+<script src="/modal.js"></script>
+
 </body>
 </html>

@@ -40,9 +40,10 @@
                 </article>
                 <article class="media">
                     <div class="media-left">
-                        <figure th:if="${duplicate.parts[0].fileType == 'IMAGE'}" class="image is-128x128">
-                            <img th:src="${duplicate.parts[0].link}">
-                        </figure>
+                        <a class="button is-outlined modal-button" data-target="modal-bis"
+                           th:imageLink="${duplicate.parts[0].link}"
+                           th:if="${duplicate.parts[0].fileType == 'IMAGE'}">View image
+                        </a>
                         <figure th:if="${duplicate.parts[0].fileType == 'AUDIO'}">
                             <audio controls>
                                 <source th:src="${duplicate.parts[0].link}">
@@ -76,11 +77,24 @@
         </div>
     </div>
 
+    <!--modal windows-->
+    <div id="modal-bis" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <p class="image">
+                <img id="image-view-link" alt="">
+            </p>
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+    </div>
+
+    <script src="/modal.js"></script>
+
     <script th:inline="javascript">
         $("input[type='checkbox']").on("click", function (event) {
-            console.log(event);
-            console.log(event.target.id);
-            console.log(event.target.checked);
+            // console.log(event);
+            // console.log(event.target.id);
+            // console.log(event.target.checked);
 
             let selectLink = $(event.target).attr("selectLink");
 
