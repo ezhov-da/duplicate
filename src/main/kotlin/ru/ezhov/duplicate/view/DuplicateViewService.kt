@@ -21,7 +21,7 @@ class DuplicateViewService(
             uploadId: String,
             page: Int,
             fileType: String?,
-            sizeOnPage: Int = 10,
+            countOnPage: Int,
             username: String,
             model: Model,
     ): String {
@@ -34,15 +34,15 @@ class DuplicateViewService(
                                     .by(uploadId)
                                     .mapNotNull { duplicateView(uploadId, it, selected, fileType) }
 
-                    val pagination = PaginationService(page, 10, duplicatesView.size)
+                    val pagination = PaginationService(page, countOnPage, duplicatesView.size)
                             .calculate { page -> page?.let {
                                 "/uploads/$uploadId/duplicates${FilterParams.create().add("page",page).add("fileType", fileType).query()}" } }
 
-                    val maxItem = sizeOnPage * page
+                    val maxItem = countOnPage * page
                     duplicatesView = if (maxItem <= duplicatesView.size) {
-                        duplicatesView.subList(maxItem - sizeOnPage, maxItem)
+                        duplicatesView.subList(maxItem - countOnPage, maxItem)
                     } else {
-                        duplicatesView.subList(maxItem - sizeOnPage, duplicatesView.size)
+                        duplicatesView.subList(maxItem - countOnPage, duplicatesView.size)
                     }
 
                     val filtersView = mutableListOf(FilterView(name = "Все", link = "/uploads/$uploadId/duplicates"))

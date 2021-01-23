@@ -5,6 +5,8 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestParam
+import ru.ezhov.duplicate.configuration.domain.ConfigurationRepository
+import ru.ezhov.duplicate.configuration.domain.PropertyName
 import ru.ezhov.duplicate.domain.DuplicateSelectedService
 import ru.ezhov.duplicate.domain.DuplicateService
 import ru.ezhov.duplicate.domain.FilterService
@@ -22,6 +24,7 @@ class UploadController(
         private val duplicateViewService: DuplicateViewService,
         private val fileService: FileService,
         private val filterService: FilterService,
+        private val configurationRepository: ConfigurationRepository,
 ) {
     @GetMapping("/")
     fun index(model: Model, principal: Principal): String {
@@ -66,6 +69,7 @@ class UploadController(
                 uploadId = uploadId,
                 page = page,
                 fileType = fileType,
+                countOnPage = configurationRepository.by(PropertyName.COUNT_ON_PAGE, "10").toInt(),
                 model = model,
                 username = principal.name,
         )
@@ -79,7 +83,7 @@ class UploadController(
             model: Model,
             principal: Principal
     ): String {
-        val sizeOnPage = 10
+        val sizeOnPage = configurationRepository.by(PropertyName.COUNT_ON_PAGE, "10").toInt()
 
         uploadService
                 .by(uploadId)
@@ -99,7 +103,7 @@ class UploadController(
                                                     )
                                                 }
                                     }
-                    val pagination = PaginationService(page, 10, selected.size)
+                    val pagination = PaginationService(page, sizeOnPage, selected.size)
                             .calculate { page ->
                                 page?.let { "/uploads/$uploadId/duplicates/selected${FilterParams.create().add("page", page).add("fileType", fileType).query()}" }
                             }
