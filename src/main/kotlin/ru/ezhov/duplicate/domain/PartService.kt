@@ -17,12 +17,12 @@ class PartService(
                 ?.let {
                     PartFileInfo(
                             fileService.mimeType(file!!.absolutePath) ?: defaultMimeType,
-                            file.readBytes()
+                            file.inputStream()
                     )
                 }
                 ?: PartFileInfo(
                         defaultMimeType,
-                        this.javaClass.getResource("/static/not-found.jpg").readBytes()
+                        this.javaClass.getResourceAsStream("/static/not-found.jpg")
                 )
     }
 

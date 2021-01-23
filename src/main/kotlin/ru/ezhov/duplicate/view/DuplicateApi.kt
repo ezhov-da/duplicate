@@ -1,12 +1,12 @@
 package ru.ezhov.duplicate.view
 
-import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.core.io.InputStreamResource
 import org.springframework.http.HttpHeaders
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
-import ru.ezhov.duplicate.domain.PartSelectedRepository
 import ru.ezhov.duplicate.domain.DuplicateUploadService
+import ru.ezhov.duplicate.domain.PartSelectedRepository
 import ru.ezhov.duplicate.domain.PartService
 import javax.servlet.http.HttpServletResponse
 
@@ -17,12 +17,13 @@ class DuplicateApi(
         private val partService: PartService
 ) {
     @GetMapping("/data")
-    fun data(@RequestParam id: String): ResponseEntity<ByteArray> =
+    fun data(@RequestParam id: String): ResponseEntity<InputStreamResource> =
             partService.data(id).let {
                 ResponseEntity
                         .ok()
                         .header(HttpHeaders.CONTENT_TYPE, it.mimeType)
-                        .body(it.data)
+                        .header(HttpHeaders.CACHE_CONTROL, "max-age=31536000")
+                        .body(InputStreamResource(it.data))
             }
 
     @PutMapping("/uploads/{uploadId}/duplicates/part/{id}/select")
