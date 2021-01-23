@@ -1,7 +1,10 @@
 package ru.ezhov.duplicate.infrastructure
 
 import org.springframework.stereotype.Service
-import ru.ezhov.duplicate.domain.*
+import ru.ezhov.duplicate.domain.AnalyseDuplicate
+import ru.ezhov.duplicate.domain.AnalysePart
+import ru.ezhov.duplicate.domain.DuplicateAnalyserService
+import ru.ezhov.duplicate.domain.Fingerprint
 import java.io.File
 
 @Service

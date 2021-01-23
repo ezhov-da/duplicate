@@ -5,7 +5,6 @@ import ru.ezhov.duplicate.domain.Fingerprint
 import ru.ezhov.duplicate.domain.FingerprintParser
 import ru.ezhov.duplicate.domain.FingerprintParserException
 import java.io.ByteArrayInputStream
-import java.io.File
 import java.util.*
 
 @Service

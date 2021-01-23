@@ -9,5 +9,5 @@ class ConstantsConfigurationRepository : ConfigurationRepository {
 
     private val constants = mapOf(PropertyName.COUNT_ON_PAGE to "30")
 
-    override fun by(propertyName: PropertyName, default:String): String = constants.getOrDefault(propertyName, default)
+    override fun by(propertyName: PropertyName, default: String): String = constants.getOrDefault(propertyName, default)
 }

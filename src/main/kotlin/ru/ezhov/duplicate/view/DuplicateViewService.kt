@@ -35,8 +35,11 @@ class DuplicateViewService(
                                     .mapNotNull { duplicateView(uploadId, it, selected, fileType) }
 
                     val pagination = PaginationService(page, countOnPage, duplicatesView.size)
-                            .calculate { page -> page?.let {
-                                "/uploads/$uploadId/duplicates${FilterParams.create().add("page",page).add("fileType", fileType).query()}" } }
+                            .calculate { page ->
+                                page?.let {
+                                    "/uploads/$uploadId/duplicates${FilterParams.create().add("page", page).add("fileType", fileType).query()}"
+                                }
+                            }
 
                     val maxItem = countOnPage * page
                     duplicatesView = if (maxItem <= duplicatesView.size) {
