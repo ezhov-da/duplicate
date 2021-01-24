@@ -8,5 +8,6 @@ class SelectedPage(
         val filters: List<FilterView>,
         val duplicatesLink: String,
         val parts: List<SelectedPartView>,
+        val removeScriptLink: String,
         pagination: PaginationView? = null
 ) : GeneralPage(pagination)

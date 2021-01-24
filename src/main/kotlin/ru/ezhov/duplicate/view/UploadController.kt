@@ -132,6 +132,7 @@ class UploadController(
                                     filters = filtersView,
                                     duplicatesLink = "/uploads/$uploadId/duplicates",
                                     parts = selected,
+                                    removeScriptLink = "/uploads/$uploadId/duplicates/selected/remove_script.sh",
                                     pagination = pagination
                             )
                     )
