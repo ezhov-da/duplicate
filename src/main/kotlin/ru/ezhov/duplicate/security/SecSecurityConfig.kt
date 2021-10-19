@@ -14,21 +14,25 @@ import org.springframework.security.crypto.password.PasswordEncoder
 @Configuration
 @EnableWebSecurity
 class SecSecurityConfig : WebSecurityConfigurerAdapter() {
-    @Throws(Exception::class)
     override fun configure(auth: AuthenticationManagerBuilder) {
         auth.inMemoryAuthentication()
-                .withUser("denis").password(passwordEncoder().encode("denis")).roles("USER")
+                .withUser("denis")
+                .password(passwordEncoder().encode("denis"))
+                .roles("USER")
                 .and()
-                .withUser("marina").password(passwordEncoder().encode("marina")).roles("USER")
+                .withUser("marina")
+                .password(passwordEncoder().encode("marina"))
+                .roles("USER")
                 .and()
-                .withUser("admin").password(passwordEncoder().encode("adminPass")).roles("ADMIN")
+                .withUser("admin")
+                .password(passwordEncoder().encode("adminPass"))
+                .roles("ADMIN")
     }
 
     //https://www.baeldung.com/spring-security-login
     //https://www.baeldung.com/spring-boot-security-autoconfiguration
     //https://www.baeldung.com/get-user-in-spring-security
     //https://www.baeldung.com/spring-security-logout
-    @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
         http
                 .csrf().disable()
@@ -43,7 +47,7 @@ class SecSecurityConfig : WebSecurityConfigurerAdapter() {
                 .loginPage("/login")
                 .defaultSuccessUrl("/", true)
                 .failureUrl("/login?error=true")
-//                .failureHandler(authenticationFailureHandler())
+                //.failureHandler(authenticationFailureHandler())
                 .and()
                 .logout()
                 .logoutUrl("/logout")
@@ -53,7 +57,5 @@ class SecSecurityConfig : WebSecurityConfigurerAdapter() {
     }
 
     @Bean
-    fun passwordEncoder(): PasswordEncoder {
-        return BCryptPasswordEncoder()
-    }
+    fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
 }

@@ -8,5 +8,5 @@ data class Part(
         val name: String,
         val file: File
 ) {
-    val fileType: String = file.extension.toLowerCase().ifEmpty { "other" }
+    val fileType: String = file.extension.lowercase().ifEmpty { "other" }
 }

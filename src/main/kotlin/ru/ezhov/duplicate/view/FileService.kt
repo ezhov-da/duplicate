@@ -21,7 +21,7 @@ class FileService {
                         FileType
                                 .values()
                                 .toList()
-                                .firstOrNull { it.name == type?.toUpperCase() }
+                                .firstOrNull { it.name == type?.uppercase() }
                     }
                     ?: FileType.OTHER
 }

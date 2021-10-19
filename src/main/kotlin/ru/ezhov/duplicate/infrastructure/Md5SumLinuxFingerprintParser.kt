@@ -33,6 +33,6 @@ class Md5SumLinuxFingerprintParser(
         val begin = path.substring(0, 2)
         val another = path.substring(3)
         val disk = begin.substring(1)
-        return disk.toUpperCase() + ":\\" + another.replace(oldValue = "/", newValue = "\\")
+        return disk.uppercase() + ":\\" + another.replace(oldValue = "/", newValue = "\\")
     }
 }

@@ -39,7 +39,7 @@ class BashRemovePartsScriptBuilder(
 
         val colonIndex = withLinuxSlash.indexOf(":")
 
-        val root = withLinuxSlash.substring(0, colonIndex).toLowerCase()
+        val root = withLinuxSlash.substring(0, colonIndex).lowercase()
         val otherPath = withLinuxSlash.substring(colonIndex + 1)
 
         return """/$root$otherPath"""
