@@ -7,7 +7,7 @@
 ```shell
 ROOT_FOLDER=/d/redmi3s-20201221-work/Camera; \
 BEGIN_DATE=$(date +%Y-%m-%d-%H-%M-%S); \
-RESULT_FILE=$ROOT_FOLDER/duplicate-$(date +%Y-%m-%d-%H-%M-%S).txt; \
+RESULT_FILE=$ROOT_FOLDER/duplicate-${BEGIN_DATE}.txt; \
 rm -f $RESULT_FILE; \
 find $ROOT_FOLDER -type f -exec md5sum {} >> $RESULT_FILE \;; \
 wc $RESULT_FILE; \
