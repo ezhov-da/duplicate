@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestParam
 import ru.ezhov.duplicate.configuration.domain.ConfigurationRepository
 import ru.ezhov.duplicate.configuration.domain.PropertyName
-import ru.ezhov.duplicate.domain.DuplicateSelectedService
-import ru.ezhov.duplicate.domain.DuplicateService
-import ru.ezhov.duplicate.domain.FilterService
-import ru.ezhov.duplicate.domain.UploadService
+import ru.ezhov.duplicate.domain.duplicate.DuplicateSelectedService
+import ru.ezhov.duplicate.domain.duplicate.DuplicateService
+import ru.ezhov.duplicate.domain.duplicate.FilterService
+import ru.ezhov.duplicate.domain.duplicate.UploadService
 import ru.ezhov.duplicate.view.filter.FilterParams
 import ru.ezhov.duplicate.view.filter.FilterView
 import java.security.Principal
@@ -18,13 +18,13 @@ import java.time.format.DateTimeFormatter
 
 @Controller
 class UploadController(
-        private val uploadService: UploadService,
-        private val duplicateService: DuplicateService,
-        private val duplicateSelectedService: DuplicateSelectedService,
-        private val duplicateViewService: DuplicateViewService,
-        private val fileService: FileService,
-        private val filterService: FilterService,
-        private val configurationRepository: ConfigurationRepository,
+    private val uploadService: UploadService,
+    private val duplicateService: DuplicateService,
+    private val duplicateSelectedService: DuplicateSelectedService,
+    private val duplicateViewService: DuplicateViewService,
+    private val fileService: FileService,
+    private val filterService: FilterService,
+    private val configurationRepository: ConfigurationRepository,
 ) {
     @GetMapping("/")
     fun index(model: Model, principal: Principal): String {

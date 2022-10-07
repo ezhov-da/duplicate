@@ -1,9 +1,13 @@
-package ru.ezhov.duplicate.domain
+package ru.ezhov.duplicate.domain.duplicate.model
 
 import java.time.LocalDateTime
 import java.util.*
+import javax.persistence.Entity
+import javax.persistence.Id
 
+@Entity
 class Upload private constructor(
+        @Id
         val id: String,
         val name: String,
         val date: LocalDateTime,

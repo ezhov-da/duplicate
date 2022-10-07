@@ -1,4 +1,6 @@
-package ru.ezhov.duplicate.domain
+package ru.ezhov.duplicate.domain.duplicate
+
+import ru.ezhov.duplicate.domain.duplicate.model.Upload
 
 interface UploadRepository {
     fun all(): List<Upload>

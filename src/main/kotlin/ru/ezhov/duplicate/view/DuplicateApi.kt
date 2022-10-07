@@ -6,18 +6,18 @@ import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
-import ru.ezhov.duplicate.domain.DuplicateUploadService
-import ru.ezhov.duplicate.domain.PartSelectedRepository
-import ru.ezhov.duplicate.domain.PartService
-import ru.ezhov.duplicate.domain.RemovePartsScriptBuilder
+import ru.ezhov.duplicate.domain.analyse.DuplicateUploadService
+import ru.ezhov.duplicate.domain.duplicate.PartSelectedRepository
+import ru.ezhov.duplicate.domain.duplicate.PartService
+import ru.ezhov.duplicate.domain.duplicate.RemovePartsScriptBuilder
 import javax.servlet.http.HttpServletResponse
 
 @RestController
 class DuplicateApi(
-        private val partSelectedRepository: PartSelectedRepository,
-        private val duplicateUploadService: DuplicateUploadService,
-        private val partService: PartService,
-        private val removePartsScriptBuilder: RemovePartsScriptBuilder
+    private val partSelectedRepository: PartSelectedRepository,
+    private val duplicateUploadService: DuplicateUploadService,
+    private val partService: PartService,
+    private val removePartsScriptBuilder: RemovePartsScriptBuilder
 ) {
     @GetMapping("/data")
     fun data(@RequestParam id: String): ResponseEntity<InputStreamResource> =

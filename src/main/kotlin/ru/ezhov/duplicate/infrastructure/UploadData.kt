@@ -1,6 +1,6 @@
 package ru.ezhov.duplicate.infrastructure
 
-import ru.ezhov.duplicate.domain.Upload
+import ru.ezhov.duplicate.domain.duplicate.model.Upload
 import java.time.LocalDateTime
 
 class UploadData {

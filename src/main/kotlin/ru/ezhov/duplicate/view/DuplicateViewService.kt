@@ -1,19 +1,28 @@
 package ru.ezhov.duplicate.view
 
+import mu.KotlinLogging
 import org.springframework.stereotype.Service
 import org.springframework.ui.Model
-import ru.ezhov.duplicate.domain.*
+import ru.ezhov.duplicate.domain.duplicate.model.Duplicate
+import ru.ezhov.duplicate.domain.duplicate.DuplicateSelectedService
+import ru.ezhov.duplicate.domain.duplicate.DuplicateService
+import ru.ezhov.duplicate.domain.duplicate.FilterService
+import ru.ezhov.duplicate.domain.duplicate.model.Part
+import ru.ezhov.duplicate.domain.duplicate.PartService
+import ru.ezhov.duplicate.domain.duplicate.UploadService
 import ru.ezhov.duplicate.view.filter.FilterParams
 import ru.ezhov.duplicate.view.filter.FilterView
 
+private val logger = KotlinLogging.logger {}
+
 @Service
 class DuplicateViewService(
-        private val uploadService: UploadService,
-        private val duplicateService: DuplicateService,
-        private val duplicateSelectedService: DuplicateSelectedService,
-        private val partService: PartService,
-        private val fileService: FileService,
-        private val filterService: FilterService,
+    private val uploadService: UploadService,
+    private val duplicateService: DuplicateService,
+    private val duplicateSelectedService: DuplicateSelectedService,
+    private val partService: PartService,
+    private val fileService: FileService,
+    private val filterService: FilterService,
 ) {
     private val commonPartService: CommonPartService = CommonPartService()
 
@@ -76,10 +85,10 @@ class DuplicateViewService(
     }
 
     private fun duplicateView(
-            uploadId: String,
-            duplicate: Duplicate,
-            selectedParts: List<Part>,
-            fileType: String?
+        uploadId: String,
+        duplicate: Duplicate,
+        selectedParts: List<Part>,
+        fileType: String?
     ): DuplicateView? {
         val parts =
                 duplicate

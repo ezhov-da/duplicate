@@ -1,10 +1,11 @@
 package ru.ezhov.duplicate.infrastructure
 
 import org.springframework.stereotype.Service
-import ru.ezhov.duplicate.domain.Fingerprint
-import ru.ezhov.duplicate.domain.FingerprintParser
-import ru.ezhov.duplicate.domain.FingerprintParserException
+import ru.ezhov.duplicate.domain.analyse.Fingerprint
+import ru.ezhov.duplicate.domain.analyse.FingerprintParser
+import ru.ezhov.duplicate.domain.analyse.FingerprintParserException
 import java.io.ByteArrayInputStream
+import java.io.File
 import java.util.*
 
 @Service
@@ -23,7 +24,7 @@ class Md5SumLinuxFingerprintParser(
                 val sum = line.substring(0, index)
                 val path = line.substring(index + 1)
                 val filePath = if (osDetector.isWindows()) convertPath(path) else path
-                files.add(Fingerprint(id = sum.trim(), filePath = filePath))
+                files.add(Fingerprint(hash = sum.trim(), file = File(filePath)))
             }
             return files
         }

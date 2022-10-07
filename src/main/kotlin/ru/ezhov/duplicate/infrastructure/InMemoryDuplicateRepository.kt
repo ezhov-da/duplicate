@@ -5,8 +5,8 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
-import ru.ezhov.duplicate.domain.Duplicate
-import ru.ezhov.duplicate.domain.DuplicateRepository
+import ru.ezhov.duplicate.domain.duplicate.model.Duplicate
+import ru.ezhov.duplicate.domain.duplicate.DuplicateRepository
 import java.io.File
 import java.util.concurrent.ConcurrentLinkedQueue
 

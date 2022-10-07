@@ -1,12 +1,13 @@
-package ru.ezhov.duplicate.domain
+package ru.ezhov.duplicate.domain.duplicate
 
 import org.springframework.stereotype.Service
+import ru.ezhov.duplicate.domain.duplicate.model.Part
 import ru.ezhov.duplicate.view.FileService
 
 @Service
 class PartService(
-        private val partRepository: PartRepository,
-        private val fileService: FileService
+    private val partRepository: PartRepository,
+    private val fileService: FileService
 ) {
 
     fun data(id: String): PartFileInfo {

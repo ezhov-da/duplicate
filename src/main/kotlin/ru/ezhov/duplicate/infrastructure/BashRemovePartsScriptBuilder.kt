@@ -1,7 +1,7 @@
 package ru.ezhov.duplicate.infrastructure
 
 import org.springframework.stereotype.Service
-import ru.ezhov.duplicate.domain.RemovePartsScriptBuilder
+import ru.ezhov.duplicate.domain.duplicate.RemovePartsScriptBuilder
 import java.io.InputStreamReader
 import java.nio.charset.StandardCharsets
 

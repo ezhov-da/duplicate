@@ -1,14 +1,20 @@
-package ru.ezhov.duplicate.domain
+package ru.ezhov.duplicate.domain.analyse
 
 import org.springframework.stereotype.Service
+import ru.ezhov.duplicate.domain.duplicate.model.Duplicate
+import ru.ezhov.duplicate.domain.duplicate.DuplicateRepository
+import ru.ezhov.duplicate.domain.duplicate.model.Part
+import ru.ezhov.duplicate.domain.duplicate.PartRepository
+import ru.ezhov.duplicate.domain.duplicate.model.Upload
+import ru.ezhov.duplicate.domain.duplicate.UploadService
 
 @Service
 class DuplicateUploadService(
-        private val fingerprintParser: FingerprintParser,
-        private val uploadService: UploadService,
-        private val duplicateAnalyserService: DuplicateAnalyserService,
-        private val duplicateRepository: DuplicateRepository,
-        private val partRepository: PartRepository
+    private val fingerprintParser: FingerprintParser,
+    private val uploadService: UploadService,
+    private val duplicateAnalyserService: DuplicateAnalyserService,
+    private val duplicateRepository: DuplicateRepository,
+    private val partRepository: PartRepository
 ) {
     fun upload(name: String, data: ByteArray) {
         val fingerprints = fingerprintParser.parse(name, data)
@@ -37,7 +43,7 @@ class DuplicateUploadService(
         duplicateRepository.save(pairs.map { p -> p.first })
         partRepository.save(pairs.flatMap { p -> p.second })
         uploadService.save(listOf(
-                Upload.create(uploadId, name)
+            Upload.create(uploadId, name)
         ))
     }
 }

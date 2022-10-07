@@ -1,4 +1,4 @@
-package ru.ezhov.duplicate.domain
+package ru.ezhov.duplicate.domain.duplicate
 
 import java.io.InputStream
 

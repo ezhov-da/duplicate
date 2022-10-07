@@ -1,4 +1,4 @@
-package ru.ezhov.duplicate.domain
+package ru.ezhov.duplicate.domain.analyse
 
 import java.io.File
 

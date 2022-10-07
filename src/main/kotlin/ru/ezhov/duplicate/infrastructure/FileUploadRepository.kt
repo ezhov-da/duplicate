@@ -4,14 +4,14 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.stereotype.Service
-import ru.ezhov.duplicate.domain.Upload
-import ru.ezhov.duplicate.domain.UploadRepository
+import org.springframework.stereotype.Repository
+import ru.ezhov.duplicate.domain.duplicate.model.Upload
+import ru.ezhov.duplicate.domain.duplicate.UploadRepository
 import java.io.File
 import java.util.concurrent.ConcurrentHashMap
 
-@Service
-class InMemoryUploadRepository(
+@Repository
+class FileUploadRepository(
         @Value("\${storage.folder}") private val storageFolder: String
 ) : UploadRepository {
     private val file: File = File(storageFolder, "uploads.yml")

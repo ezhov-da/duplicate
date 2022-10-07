@@ -1,6 +1,6 @@
 package ru.ezhov.duplicate.infrastructure
 
-import ru.ezhov.duplicate.domain.Part
+import ru.ezhov.duplicate.domain.duplicate.model.Part
 import java.io.File
 
 class PartData {

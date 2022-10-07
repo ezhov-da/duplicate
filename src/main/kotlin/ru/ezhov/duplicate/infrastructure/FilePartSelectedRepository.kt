@@ -5,12 +5,12 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
-import ru.ezhov.duplicate.domain.PartSelectedRepository
+import ru.ezhov.duplicate.domain.duplicate.PartSelectedRepository
 import java.io.File
 import java.util.concurrent.ConcurrentHashMap
 
 @Component
-class InMemoryPartSelectedRepository(
+class FilePartSelectedRepository(
         @Value("\${storage.folder}") private val storageFolder: String
 ) : PartSelectedRepository {
     private val file: File = File(storageFolder, "selected.yml")

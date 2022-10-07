@@ -1,4 +1,4 @@
-package ru.ezhov.duplicate.domain
+package ru.ezhov.duplicate.domain.analyse
 
 class FingerprintParserException : RuntimeException {
     constructor(message: String?, cause: Throwable?) : super(message, cause)

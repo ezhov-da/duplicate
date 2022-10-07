@@ -1,6 +1,7 @@
-package ru.ezhov.duplicate.domain
+package ru.ezhov.duplicate.domain.duplicate
 
 import org.springframework.stereotype.Service
+import ru.ezhov.duplicate.domain.duplicate.model.Upload
 
 @Service
 class UploadService(

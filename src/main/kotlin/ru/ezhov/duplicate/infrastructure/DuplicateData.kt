@@ -1,6 +1,6 @@
 package ru.ezhov.duplicate.infrastructure
 
-import ru.ezhov.duplicate.domain.Duplicate
+import ru.ezhov.duplicate.domain.duplicate.model.Duplicate
 
 class DuplicateData {
     var id: String = ""
