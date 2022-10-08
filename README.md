@@ -5,7 +5,7 @@
 # Создание отчёта для работы сервера
 
 ```shell
-ROOT_FOLDER=/d/redmi3s-20201221-work/Camera; \
+ROOT_FOLDER=/d/repository/duplicate/example; \
 BEGIN_DATE=$(date +%Y-%m-%d-%H-%M-%S); \
 RESULT_FILE=$ROOT_FOLDER/duplicate-${BEGIN_DATE}.txt; \
 rm -f $RESULT_FILE; \

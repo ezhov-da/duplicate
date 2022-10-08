@@ -1,9 +1,8 @@
 package ru.ezhov.duplicate.domain.duplicate
 
+import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.stereotype.Repository
 import ru.ezhov.duplicate.domain.duplicate.model.Part
 
-interface PartRepository {
-    fun by(id: String): Part?
-
-    fun save(parts: List<Part>)
-}
+@Repository
+interface PartRepository : JpaRepository<Part, String>

@@ -1,23 +1,29 @@
 storage:
-  folder: ${user.home}/.duplicate-repository
+    folder: ${user.home}/.duplicate-repository
 
 spring:
-  servlet:
+    servlet:
     multipart:
-      max-file-size: 100MB
-      max-request-size: 100MB
-
-  datasource:
-    url: jdbc:h2:./duplicate
+        max-file-size: 100MB
+        max-request-size: 100MB
+    datasource:
+        url: jdbc:h2:./duplicate
+    jpa:
+        hibernate:
+            ddl-auto: none
+        show-sql: true
+    sql:
+        init:
+            mode: always
 
 server:
-  tomcat:
-    max-http-form-post-size: 10MB
+    tomcat:
+        max-http-form-post-size: 10MB
 
 hibernate:
-  dialect: org.hibernate.dialect.H2Dialect
+    dialect: org.hibernate.dialect.H2Dialect
 
 properties:
-  count-on-page: "30"
+    count-on-page: "30"
 
 

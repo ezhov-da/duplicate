@@ -1,0 +1,11 @@
+d41d8cd98f00b204e9800998ecf8427e */d/repository/duplicate/example/duplicate-2022-10-08-06-42-49.txt
+5aa858befc56dee1effe7eae1c0f88bb */d/repository/duplicate/example/file_example_JPG_100kB — копия — копия.jpg
+5aa858befc56dee1effe7eae1c0f88bb */d/repository/duplicate/example/file_example_JPG_100kB — копия.jpg
+5aa858befc56dee1effe7eae1c0f88bb */d/repository/duplicate/example/file_example_JPG_100kB.jpg
+0c481e87f2774b1bd41a0a70d9b70d11 */d/repository/duplicate/example/file_example_MP3_700KB — копия.mp3
+0c481e87f2774b1bd41a0a70d9b70d11 */d/repository/duplicate/example/file_example_MP3_700KB.mp3
+d9061d3da8601932e98f79ec8ba1c877 */d/repository/duplicate/example/file_example_MP4_480_1_5MG — копия (2).mp4
+d9061d3da8601932e98f79ec8ba1c877 */d/repository/duplicate/example/file_example_MP4_480_1_5MG — копия (3).mp4
+d9061d3da8601932e98f79ec8ba1c877 */d/repository/duplicate/example/file_example_MP4_480_1_5MG — копия (4).mp4
+d9061d3da8601932e98f79ec8ba1c877 */d/repository/duplicate/example/file_example_MP4_480_1_5MG — копия.mp4
+d9061d3da8601932e98f79ec8ba1c877 */d/repository/duplicate/example/file_example_MP4_480_1_5MG.mp4

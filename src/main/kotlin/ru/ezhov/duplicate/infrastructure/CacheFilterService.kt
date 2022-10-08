@@ -1,18 +1,15 @@
 package ru.ezhov.duplicate.infrastructure
 
+import org.springframework.context.annotation.Primary
 import org.springframework.stereotype.Service
-import ru.ezhov.duplicate.domain.duplicate.DuplicateRepository
 import ru.ezhov.duplicate.domain.duplicate.FilterService
-import ru.ezhov.duplicate.domain.duplicate.PartRepository
 import java.util.concurrent.ConcurrentHashMap
 
 @Service
+@Primary
 class CacheFilterService(
-    duplicateRepository: DuplicateRepository,
-    partRepository: PartRepository
+    private val defaultFilterService: DefaultFilterService,
 ) : FilterService {
-    private val defaultFilterService = DefaultFilterService(duplicateRepository, partRepository)
-
     private val fileTypes = ConcurrentHashMap<String, List<String>>()
 
     override fun availableFileTypes(uploadId: String): List<String> {

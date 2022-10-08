@@ -30,7 +30,7 @@ class UploadController(
     fun index(model: Model, principal: Principal): String {
         val uploads = uploadService
                 .all()
-                .sortedByDescending { it.date }
+                .sortedByDescending { it.creationDate }
                 .map {
                     val uploadId = it.id
 
@@ -39,7 +39,7 @@ class UploadController(
                     UploadView(
                             id = it.id,
                             name = it.name,
-                            date = it.date.format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss")),
+                            date = it.creationDate.format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss")),
                             duplicatesLink = "/uploads/${it.id}/duplicates",
                             selectedLink = count.takeIf { c -> c > 0 }?.let { "/uploads/$uploadId/duplicates/selected" },
                             selectedCount = count,
@@ -92,7 +92,7 @@ class UploadController(
                             duplicateSelectedService
                                     .selected(uploadId)
                                     .mapNotNull { p ->
-                                        p.takeIf { fileType == null || fileType == p.fileType }
+                                        p.takeIf { fileType == null || fileType == p.fileType() }
                                                 ?.let {
                                                     SelectedPartView(
                                                             id = it.id,
@@ -108,7 +108,7 @@ class UploadController(
                                 page?.let { "/uploads/$uploadId/duplicates/selected${FilterParams.create().add("page", page).add("fileType", fileType).query()}" }
                             }
 
-                    val filtersView = mutableListOf(FilterView(name = "Все", link = "/uploads/$uploadId/duplicates"))
+                    val filtersView = mutableListOf(FilterView(name = "Все", link = "/uploads/$uploadId/duplicates/selected"))
                     filtersView
                             .addAll(filterService
                                     .availableFileTypes(uploadId)

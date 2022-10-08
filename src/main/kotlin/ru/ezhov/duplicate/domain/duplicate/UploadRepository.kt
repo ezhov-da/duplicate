@@ -1,11 +1,8 @@
 package ru.ezhov.duplicate.domain.duplicate
 
+import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.stereotype.Repository
 import ru.ezhov.duplicate.domain.duplicate.model.Upload
 
-interface UploadRepository {
-    fun all(): List<Upload>
-
-    fun save(upload: List<Upload>)
-
-    fun by(id: String): Upload?
-}
+@Repository
+interface UploadRepository: JpaRepository<Upload, String>

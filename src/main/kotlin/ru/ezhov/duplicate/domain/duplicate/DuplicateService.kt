@@ -1,12 +1,15 @@
 package ru.ezhov.duplicate.domain.duplicate
 
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
+import ru.ezhov.duplicate.domain.duplicate.model.Duplicate
 
 @Service
 class DuplicateService(
-        private val duplicateRepository: DuplicateRepository
+    private val uploadRepository: UploadRepository
 ) {
-    fun all() = duplicateRepository.all()
-
-    fun by(uploadId: String) = duplicateRepository.by(uploadId)
+    fun by(uploadId: String): List<Duplicate> = uploadRepository
+        .findByIdOrNull(uploadId)
+        ?.duplicates
+        .orEmpty()
 }
