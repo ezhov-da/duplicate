@@ -25,7 +25,7 @@ class DuplicateApi(
                 ResponseEntity
                         .ok()
                         .header(HttpHeaders.CONTENT_TYPE, it.mimeType)
-                        .header(HttpHeaders.CACHE_CONTROL, "max-age=31536000")
+//                        .header(HttpHeaders.CACHE_CONTROL, "max-age=31536000")
                         .body(InputStreamResource(it.data))
             }
 
