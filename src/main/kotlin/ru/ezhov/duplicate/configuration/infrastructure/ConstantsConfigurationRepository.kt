@@ -7,7 +7,7 @@ import ru.ezhov.duplicate.configuration.domain.PropertyName
 
 @Service
 class ConstantsConfigurationRepository(
-        @Value("\${properties.count-on-page}") private val countOnPage: String
+    @Value("\${properties.count-on-page}") private val countOnPage: String
 ) : ConfigurationRepository {
 
     private val constants = mapOf(PropertyName.COUNT_ON_PAGE to countOnPage)

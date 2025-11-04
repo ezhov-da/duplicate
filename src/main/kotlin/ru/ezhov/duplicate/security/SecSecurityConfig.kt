@@ -16,17 +16,17 @@ import org.springframework.security.crypto.password.PasswordEncoder
 class SecSecurityConfig : WebSecurityConfigurerAdapter() {
     override fun configure(auth: AuthenticationManagerBuilder) {
         auth.inMemoryAuthentication()
-                .withUser("denis")
-                .password(passwordEncoder().encode("denis"))
-                .roles("USER")
-                .and()
-                .withUser("marina")
-                .password(passwordEncoder().encode("marina"))
-                .roles("USER")
-                .and()
-                .withUser("admin")
-                .password(passwordEncoder().encode("adminPass"))
-                .roles("ADMIN")
+            .withUser("denis")
+            .password(passwordEncoder().encode("denis"))
+            .roles("USER")
+            .and()
+            .withUser("marina")
+            .password(passwordEncoder().encode("marina"))
+            .roles("USER")
+            .and()
+            .withUser("admin")
+            .password(passwordEncoder().encode("adminPass"))
+            .roles("ADMIN")
     }
 
     //https://www.baeldung.com/spring-security-login
@@ -35,25 +35,25 @@ class SecSecurityConfig : WebSecurityConfigurerAdapter() {
     //https://www.baeldung.com/spring-security-logout
     override fun configure(http: HttpSecurity) {
         http
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                //.antMatchers("/anonymous*").anonymous()
-                .antMatchers("/login*").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                // auth
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/", true)
-                .failureUrl("/login?error=true")
-                //.failureHandler(authenticationFailureHandler())
-                .and()
-                .logout()
-                .logoutUrl("/logout")
-                .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID")
-                .logoutSuccessUrl("/login")
+            .csrf().disable()
+            .authorizeRequests()
+            .antMatchers("/admin/**").hasRole("ADMIN")
+            //.antMatchers("/anonymous*").anonymous()
+            .antMatchers("/login*").permitAll()
+            .anyRequest().authenticated()
+            .and()
+            // auth
+            .formLogin()
+            .loginPage("/login")
+            .defaultSuccessUrl("/", true)
+            .failureUrl("/login?error=true")
+            //.failureHandler(authenticationFailureHandler())
+            .and()
+            .logout()
+            .logoutUrl("/logout")
+            .invalidateHttpSession(true)
+            .deleteCookies("JSESSIONID")
+            .logoutSuccessUrl("/login")
     }
 
     @Bean

@@ -10,7 +10,7 @@ import java.util.*
 
 @Service
 class Md5SumLinuxFingerprintParser(
-        private val osDetector: OsDetector
+    private val osDetector: OsDetector
 ) : FingerprintParser {
     override fun parse(name: String, bytes: ByteArray): List<Fingerprint> {
         Scanner(ByteArrayInputStream(bytes), "UTF-8").use { scanner ->

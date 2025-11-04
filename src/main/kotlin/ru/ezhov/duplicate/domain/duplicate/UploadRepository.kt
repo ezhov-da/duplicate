@@ -5,4 +5,4 @@ import org.springframework.stereotype.Repository
 import ru.ezhov.duplicate.domain.duplicate.model.Upload
 
 @Repository
-interface UploadRepository: JpaRepository<Upload, String>
+interface UploadRepository : JpaRepository<Upload, String>

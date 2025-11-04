@@ -7,7 +7,9 @@ spring:
         max-file-size: 100MB
         max-request-size: 100MB
     datasource:
-        url: jdbc:h2:./duplicate
+        url: jdbc:h2:tcp://localhost/~/duplicate
+        username: sa
+        password: duplicate
     jpa:
         hibernate:
             ddl-auto: none

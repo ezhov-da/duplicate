@@ -36,7 +36,13 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("io.github.microutils:kotlin-logging-jvm:2.0.10")
 
-    implementation("com.h2database:h2:2.1.214")
+    // https://mvnrepository.com/artifact/io.github.java-diff-utils/java-diff-utils
+    implementation("io.github.java-diff-utils:java-diff-utils:4.16")
+
+    // https://mvnrepository.com/artifact/net.coobird/thumbnailator
+    implementation("net.coobird:thumbnailator:0.4.21")
+
+    implementation("com.h2database:h2:2.2.224")
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 

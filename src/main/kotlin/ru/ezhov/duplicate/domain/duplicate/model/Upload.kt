@@ -1,7 +1,7 @@
 package ru.ezhov.duplicate.domain.duplicate.model
 
 import java.time.LocalDateTime
-import java.util.UUID
+import java.util.*
 import javax.persistence.CascadeType
 import javax.persistence.Column
 import javax.persistence.Entity

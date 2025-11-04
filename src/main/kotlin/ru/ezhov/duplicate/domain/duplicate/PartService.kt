@@ -3,7 +3,7 @@ package ru.ezhov.duplicate.domain.duplicate
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import ru.ezhov.duplicate.domain.duplicate.model.Part
-import ru.ezhov.duplicate.view.FileService
+import ru.ezhov.duplicate.interfaces.service.FileService
 
 @Service
 class PartService(
@@ -20,21 +20,21 @@ class PartService(
                         .takeIf { it.exists() }
                         ?.let {
                             PartFileInfo(
-                                fileService.mimeType(file!!.absolutePath) ?: defaultMimeType,
-                                file.inputStream()
+                                mimeType = fileService.mimeType(file.absolutePath) ?: DEFAULT_MIME_TYPE,
+                                data = file.inputStream()
                             )
                         }
 
                 }
             }
             ?: PartFileInfo(
-                defaultMimeType,
-                this.javaClass.getResourceAsStream("/static/not-found.jpg")
+                mimeType = DEFAULT_MIME_TYPE,
+                data = this.javaClass.getResourceAsStream("/static/not-found.jpg")!!
             )
 
     fun by(partId: String): Part? = partRepository.findByIdOrNull(partId)
 
     companion object {
-        private const val defaultMimeType = "image/jpeg"
+        private const val DEFAULT_MIME_TYPE = "image/jpeg"
     }
 }

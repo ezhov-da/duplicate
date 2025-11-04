@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull
 
 @Entity
 @Table(name = "PARTS")
-data class Part private constructor(
+data class Part(
     @Id
     val id: String,
 
