@@ -36,21 +36,8 @@
                 <article class="media">
                     <div class="media-left">
                         <div class="media-left">
-                            <figure th:if="${part.fileType == 'IMAGE'}" class="image is-128x128">
-                                <img th:src="${part.link}">
-                            </figure>
-                            <figure th:if="${part.fileType == 'AUDIO'}">
-                                <audio controls>
-                                    <source th:src="${part.link}">
-                                </audio>
-                            </figure>
-                            <figure th:if="${part.fileType == 'VIDEO'}" class="image is-128x128">
-                                <video controls>
-                                    <source th:src="${part.link}">
-                                </video>
-                            </figure>
-                            <figure th:if="${part.fileType == 'OTHER'}" class="image is-128x128">
-                                <img th:src="${part.link}">
+                            <figure class="image is-128x128">
+                                <img th:src="${part.previewLink}">
                             </figure>
                         </div>
                     </div>

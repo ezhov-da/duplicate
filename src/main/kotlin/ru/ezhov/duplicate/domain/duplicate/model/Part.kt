@@ -37,11 +37,11 @@ data class Part(
 
     @NotNull
     @Column(name = "IS_SELECTED")
-    var selected: Boolean = false,
+    var isSelected: Boolean = false,
 
     @NotNull
     @Column(name = "IS_DELETED")
-    val deleted: Boolean = false,
+    val isDeleted: Boolean = false,
 
     @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinColumn(name = "ID", referencedColumnName = "PART_ID")

@@ -16,6 +16,8 @@ import ru.ezhov.duplicate.domain.duplicate.PartService
 import ru.ezhov.duplicate.domain.duplicate.RemovePartsScriptBuilder
 import ru.ezhov.duplicate.domain.duplicate.UploadService
 import ru.ezhov.duplicate.interfaces.rest.model.SelectResult
+import ru.ezhov.duplicate.interfaces.service.FileService
+import ru.ezhov.duplicate.interfaces.service.FileType
 import java.security.Principal
 import javax.servlet.http.HttpServletResponse
 
@@ -24,7 +26,8 @@ class DuplicateApi(
     private val uploadService: UploadService,
     private val duplicateUploadService: DuplicateUploadService,
     private val partService: PartService,
-    private val removePartsScriptBuilder: RemovePartsScriptBuilder
+    private val removePartsScriptBuilder: RemovePartsScriptBuilder,
+    private val fileService: FileService,
 ) {
     @GetMapping("/data")
     fun data(@RequestParam id: String): ResponseEntity<InputStreamResource> =
@@ -34,6 +37,24 @@ class DuplicateApi(
                 .header(HttpHeaders.CONTENT_TYPE, it.mimeType)
                 .header(HttpHeaders.CACHE_CONTROL, "max-age=31536000")
                 .body(InputStreamResource(it.data))
+        }
+
+    @GetMapping("/preview")
+    fun preview(@RequestParam id: String): ResponseEntity<InputStreamResource> =
+        partService.by(id)!!.let { part ->
+            val type = fileService.fileType(part.file.absolutePath)
+            val data = when (type) {
+                FileType.AUDIO -> this.javaClass.getResourceAsStream("/static/image/audio.png")!!
+                FileType.VIDEO -> this.javaClass.getResourceAsStream("/static/image/video.png")!!
+                FileType.IMAGE -> partService.data(id).data
+                FileType.OTHER -> this.javaClass.getResourceAsStream("/static/image/other.png")!!
+            }
+
+            ResponseEntity
+                .ok()
+                .header(HttpHeaders.CONTENT_TYPE, fileService.mimeTypeOrDefault(part.file.absolutePath))
+                .header(HttpHeaders.CACHE_CONTROL, "max-age=31536000")
+                .body(InputStreamResource(data))
         }
 
     @PutMapping("/uploads/{uploadId}/duplicates/part/{id}/select")
@@ -63,7 +84,7 @@ class DuplicateApi(
                 ?.duplicates
                 ?.map {
                     it.parts.mapNotNull { part ->
-                        part.takeIf { p -> p.selected }?.let { part.file.absolutePath }
+                        part.takeIf { p -> p.isSelected }?.let { part.file.absolutePath }
                     }
                 }
                 .orEmpty()

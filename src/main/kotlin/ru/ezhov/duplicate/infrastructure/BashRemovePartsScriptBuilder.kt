@@ -16,7 +16,7 @@ class BashRemovePartsScriptBuilder(
 
     override fun buildScript(absoluteFilePaths: List<String>): String {
 
-        InputStreamReader(this.javaClass.getResourceAsStream("/remove_parts_script.sh"), StandardCharsets.UTF_8)
+        InputStreamReader(this.javaClass.getResourceAsStream("/remove_parts_script.sh")!!, StandardCharsets.UTF_8)
             .use {
                 val text = it.readText()
                 val arr = text.split("\n")

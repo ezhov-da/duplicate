@@ -41,21 +41,8 @@
                 </article>
                 <article class="media">
                     <div class="media-left">
-                        <figure th:if="${duplicate.parts[0].fileType == 'IMAGE'}" class="image is-128x128">
-                            <img th:src="${duplicate.parts[0].link}">
-                        </figure>
-                        <figure th:if="${duplicate.parts[0].fileType == 'AUDIO'}">
-                            <audio controls>
-                                <source th:src="${duplicate.parts[0].link}">
-                            </audio>
-                        </figure>
-                        <figure th:if="${duplicate.parts[0].fileType == 'VIDEO'}" class="image is-128x128">
-                            <video controls>
-                                <source th:src="${duplicate.parts[0].link}">
-                            </video>
-                        </figure>
-                        <figure th:if="${duplicate.parts[0].fileType == 'OTHER'}" class="image is-128x128">
-                            <img th:src="${duplicate.parts[0].link}">
+                        <figure class="image is-128x128">
+                            <img th:src="${duplicate.parts[0].previewLink}">
                         </figure>
                     </div>
                     <div class="media-content">
@@ -63,7 +50,7 @@
                             <label class="checkbox">
                                 <input type="checkbox" th:id="${part.id}" th:checked="${part.selected}"
                                        th:selectLink="${part.selectLink}"> <span
-                                    th:text="${part.path}"/>
+                                th:text="${part.path}"/>
                                 <a target="_blank" th:href="${part.link}"><span th:text="${part.name}"/> </a>
                             </label>
                         </div>

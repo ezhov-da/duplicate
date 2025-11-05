@@ -19,8 +19,8 @@ class UploadService(
 
     fun select(uploadId: String, partId: String): Boolean =
         partRepository.findByIdOrNull(partId)?.let { part ->
-            val new = !part.selected
-            part.selected = new
+            val new = !part.isSelected
+            part.isSelected = new
             partRepository.save(part)
             new
         }

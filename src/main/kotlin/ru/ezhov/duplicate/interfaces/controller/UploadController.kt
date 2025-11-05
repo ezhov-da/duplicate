@@ -106,6 +106,7 @@ class UploadController(
                                         path = it.file.absolutePath,
                                         name = it.name,
                                         link = "/data?id=${it.id}",
+                                        previewLink = "/preview?id=${it.id}",
                                         fileType = fileService.fileType(it.file.absolutePath).name
                                     )
                                 }

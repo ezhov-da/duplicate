@@ -110,6 +110,7 @@ class DuplicateViewService(
                         path = commonPart?.let { cp -> p.file.absolutePath.substring(cp.length) }
                             ?: p.file.absolutePath,
                         name = p.name,
+                        previewLink = "/preview?id=${p.id}",
                         link = "/data?id=${p.id}",
                         selected = selectedParts.find { s -> s.id == p.id } !== null,
                         selectLink = "/uploads/$uploadId/duplicates/part/${p.id}/select",

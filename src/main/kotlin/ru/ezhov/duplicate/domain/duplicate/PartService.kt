@@ -3,6 +3,7 @@ package ru.ezhov.duplicate.domain.duplicate
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import ru.ezhov.duplicate.domain.duplicate.model.Part
+import ru.ezhov.duplicate.interfaces.service.DEFAULT_MIME_TYPE
 import ru.ezhov.duplicate.interfaces.service.FileService
 
 @Service
@@ -11,16 +12,16 @@ class PartService(
     private val fileService: FileService
 ) {
 
-    fun data(id: String): PartFileInfo =
+    fun data(partId: String): PartFileInfo =
         partRepository
-            .findByIdOrNull(id)
+            .findByIdOrNull(partId)
             ?.let { part ->
                 part.file.let { file ->
                     file
                         .takeIf { it.exists() }
                         ?.let {
                             PartFileInfo(
-                                mimeType = fileService.mimeType(file.absolutePath) ?: DEFAULT_MIME_TYPE,
+                                mimeType = fileService.mimeTypeOrDefault(file.absolutePath),
                                 data = file.inputStream()
                             )
                         }
@@ -33,8 +34,4 @@ class PartService(
             )
 
     fun by(partId: String): Part? = partRepository.findByIdOrNull(partId)
-
-    companion object {
-        private const val DEFAULT_MIME_TYPE = "image/jpeg"
-    }
 }

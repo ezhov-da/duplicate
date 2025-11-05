@@ -11,7 +11,7 @@ class DuplicateSelectedService(
     fun selected(uploadId: String): List<Part> =
         uploadRepository.findByIdOrNull(uploadId)?.let { upload ->
             upload.duplicates.map { duplicate ->
-                duplicate.parts.filter { part -> part.selected }
+                duplicate.parts.filter { part -> part.isSelected }
             }
         }.orEmpty()
             .flatten()
